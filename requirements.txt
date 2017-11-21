@@ -1,0 +1,2 @@
+pandas==0.21.0
+boardgamegeek==0.13.2

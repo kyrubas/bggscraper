@@ -1,6 +1,7 @@
-from boardgamegeek import BGGClient
-from boardgamegeek import BGGApiError
+from boardgamegeek import BoardGameGeek 
+from boardgamegeek import BoardGameGeekAPIError
 import pandas as pd
+bgg = BoardGameGeek()
 gameframe = pd.DataFrame({"Name":[],
                               "Year":[],
                               "ID":[],
@@ -10,7 +11,7 @@ gameframe = pd.DataFrame({"Name":[],
                               "Min_Age":[],
                               "Median_Rating":[],
                               "Bays_Rating":[]})
-for i in range(1,120000):
+for i in range(1,12):
     try:
         g = bgg.game(game_id=i)
         gamedat = pd.DataFrame({"Name":[g.name],
@@ -24,6 +25,6 @@ for i in range(1,120000):
                                 "Bays_Rating":[g.rating_bayes_average]})
 
         gameframe = pd.concat([gameframe,gamedat])
-    except BGGApiError:
+    except BoardGameGeekAPIError:
         pass
 gameframe.to_csv("Game_Data.csv")
